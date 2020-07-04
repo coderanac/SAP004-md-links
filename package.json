@@ -1,4 +1,33 @@
 {
-  "name": "md-links",
-  "version": "0.1.0"
+  "name": "mdlink",
+  "version": "1.0.0",
+  "description": "package of read arquives md, and validate links",
+  "main": "./main.js",
+  "bin": {
+    "md-links": "./cli.js"
+  },
+  "scripts": {
+    "test": "nyc mocha ./test/*.js",
+    "eslint": "eslint ./"
+  },
+  "keywords": [
+    "markdown",
+    "md"
+  ],
+  "author": "coderanac",
+  "license": "ISC",
+  "dependencies": {
+    "chai": "^4.2.0",
+    "chalk": "^4.1.0",
+    "node-fetch": "^2.6.0",
+    "nyc": "^15.1.0"
+  },
+  "devDependencies": {
+    "eslint": "^7.3.1",
+    "eslint-plugin-chai-friendly": "^0.6.0",
+    "eslint-plugin-mocha": "^7.0.1",
+    "glob": "^7.1.6",
+    "got": "^11.4.0",
+    "mocha": "^8.0.1"
+  }
 }
