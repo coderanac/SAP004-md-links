@@ -1,32 +1,22 @@
-const path = require('path');
-const fs = require('fs');
-const glob = require('glob');
+const { extractLinksFromFile, forEachFile, validateLink } = require('./common');
 
-const { findLinks, validateLink } = require('./scripts/index');
+function getLinks(filePath) {
+  const links = [];
 
-
-function markdownLinks(archivePath, validate) {
-  const files = archivePath.includes('.md') ? [archivePath] : glob.sync(`${archivePath}**/*.md`);
-  const requests = [];
-
-  files.forEach(file => {
-    const pathAbsolute = path.resolve(file);
-
-    if (fs.existsSync(pathAbsolute)) {
-      const textMD = fs.readFileSync(pathAbsolute).toString('utf-8');
-      const linksMD = findLinks(textMD, pathAbsolute);
-
-      requests.push(...(
-        validate === true
-          ? validateLink(linksMD)
-          : linksMD.map(link => Promise.resolve(link))
-      ));
-    } else {
-      throw new Error('Markdown file not found by path');
-    }
+  forEachFile(filePath, (file) => {
+    links.push(...extractLinksFromFile(file));
   });
 
-  return Promise.all(requests).then((links) => links);
+  return links;
 }
 
-module.exports = markdownLinks;
+function getLinksWithValidation(filePath) {
+  const links = getLinks(filePath);
+
+  const requests = links.map(validateLink);
+
+  return Promise.all(requests);
+}
+
+exports.getLinks = getLinks;
+exports.getLinksWithValidation = getLinksWithValidation;
