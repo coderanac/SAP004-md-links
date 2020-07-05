@@ -1,4 +1,6 @@
-<h1 align="center">Markdown Links</h1>
+# Markdown Links
+
+Md-link is a lib to filter and validate markdown links.
 
 <img src="https://github.com/coderanac/SAP004-md-links/blob/master/assets-readme/render1593977676519.gif" width="100%" />
 
