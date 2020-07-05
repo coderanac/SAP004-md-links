@@ -2,7 +2,7 @@ const path = require('path');
 const fs = require('fs');
 const glob = require('glob');
 
-const { splitLinks, matchLinks, validateLink } = require('./scripts/index');
+const { findLinks, validateLink } = require('./scripts/index');
 
 
 function markdownLinks(archivePath, validate) {
@@ -14,13 +14,12 @@ function markdownLinks(archivePath, validate) {
 
     if (fs.existsSync(pathAbsolute)) {
       const textMD = fs.readFileSync(pathAbsolute).toString('utf-8');
-      const linksMD = matchLinks(textMD);
-      const formatedLinks = splitLinks(linksMD, pathAbsolute);
+      const linksMD = findLinks(textMD, pathAbsolute);
 
       requests.push(...(
         validate === true
-          ? validateLink(formatedLinks)
-          : formatedLinks.map(link => Promise.resolve(link))
+          ? validateLink(linksMD)
+          : linksMD.map(link => Promise.resolve(link))
       ));
     } else {
       throw new Error('Markdown file not found by path');
