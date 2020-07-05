@@ -1,24 +1,14 @@
 const fetch = require('node-fetch');
 
-exports.splitLinks = (links, path) => {
-  const myLinks = [];
-
-  links.forEach(link => {
-    const groups = (/\[(.*)\]\((.*)\)/gim);
-    link.replace(groups, '$1, $2');
-    myLinks.push({
-      href: RegExp.$2,
-      text: RegExp.$1,
-      file: path,
-    });
-  });
-
-  return myLinks;
-}
-
-exports.matchLinks = (text) => {
+exports.findLinks = (text, file) => {
+  const groups = (/\[(.*)\]\((.*)\)/gim);
   const regx = /(\[.*\])(\(.*\))/gim;
-  return text.match(regx);
+  const links = text.match(regx);
+
+  return links.map(link => {
+    const [,text, href] = groups.exec(link);
+    return { href, text, file };
+  });
 }
 
 exports.validateLink = (listLinks) => {
