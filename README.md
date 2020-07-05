@@ -25,32 +25,32 @@ md-link [path] [options]
 <i>Exemple:</i>
 
 ~~~
-md-link myFolder/README.MD
+md-link myFolder/YOURFILE.md
 ~~~
 
 ~~~
-md-link README.MD
+md-link YOURFILE.md
 ~~~
 
 ### Options
 `--validate` - this command validates the links.
 
 ~~~
-md-link README.MD --validate
+md-link YOURFILE.md --validate
 ~~~
 </br>
 
 `--stats` - this command brings statistics about the links: how many are there and how many are unique.
 
 ~~~
-md-link README.MD --stats
+md-link YOURFILE.md --stats
 ~~~
 </br>
 
 `--validate --stats` - this command brings statistics about validated links: how many are there and how many are unique, how many are broken or ok.
 
 ~~~
-md-link README.MD --validate --stats
+md-link YOURFILE.md --validate --stats
 ~~~
 
 ## Usage as API
@@ -86,7 +86,7 @@ We offer two: one that lists the links and the other that lists and validates.
 This command returns a list of the links found.
 
 ~~~
-md.getLinks('README.MD');
+md.getLinks('YOURFILE.md');
 ~~~
 <br/>
 
@@ -105,5 +105,5 @@ md.getLinks('README.MD');
 This command returns a promise with the list of validated links. To handle the return, just do a then and log the response.
 
 ~~~
-md.getLinksWithValidation('README.md')
+md.getLinksWithValidation('YOURFILE.md')
 ~~~
