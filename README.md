@@ -74,8 +74,10 @@ We offer two: one that lists the links and the other that lists and validates.
 
 `getLinks` is a function that takes a `path` and returns an array of objects. This object has a link, title and file path.
 </br>
+
 `Path {STRING}` path receives a string that must have the path to a folder or file.
 </br>
+
 *You don't need the absolute path, the API solves the path.*
 </br>
 
@@ -88,10 +90,13 @@ md.getLinks('README.MD');
 
 `getLinksWithValidation` is a function that takes a `path`. If the path is just a file it returns a promise, but if the path is just a folder it returns an array of promises.
 </br>
+
 `Path {STRING}` path receives a string that must have the path to a folder or file.
 </br>
+
 *You don't need the absolute path, the API solves the path.*
 </br>
+
 *When passing a folder, before resolving the promise you must go through the array and resolve each return*
 </br>
 
