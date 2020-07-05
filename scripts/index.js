@@ -1,11 +1,11 @@
 const fetch = require('node-fetch');
 
 exports.findLinks = (text, file) => {
-  const groups = (/\[(.*)\]\((.*)\)/gim);
   const regx = /(\[.*\])(\(.*\))/gim;
   const links = text.match(regx);
 
   return links.map(link => {
+    const groups = /\[(.*)\]\((.*)\)/gim;
     const [,text, href] = groups.exec(link);
     return { href, text, file };
   });
