@@ -90,16 +90,13 @@ md.getLinks('YOURFILE.md');
 ~~~
 <br/>
 
-`getLinksWithValidation` is a function that takes a `path`. If the path is just a file it returns a promise, but if the path is just a folder it returns an array of promises.
+`getLinksWithValidation` is a function that takes a `path`. It returns a promise that must also be resolved.
 </br>
 
 `Path {STRING}` path receives a string that must have the path to a folder or file.
 </br>
 
 *You don't need the absolute path, the API solves the path.*
-</br>
-
-*When passing a folder, before resolving the promise you must go through the array and resolve each return*
 </br>
 
 This command returns a promise with the list of validated links. To handle the return, just do a then and log the response.
