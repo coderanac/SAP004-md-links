@@ -20,7 +20,7 @@ function forEachFile(filePath, callback) {
 
 function findLinks(text, file) {
   const regx = /(\[.*\])(\(.*\))/gim;
-  const links = text.match(regx);
+  const links = text.match(regx) || [];
 
   return links.map(link => {
     const groups = /\[(.*)\]\((.*)\)/gim;
@@ -43,9 +43,9 @@ function validateLink(link) {
       })
     )
     .catch(
-      (error) => ({
+      () => ({
         ...link,
-        status: error.code === 'ENOTFOUND' ? 'DNS problem' : error.status,
+        status: 'DNS problem',
       })
     );
 }
@@ -53,3 +53,4 @@ function validateLink(link) {
 exports.extractLinksFromFile = extractLinksFromFile;
 exports.forEachFile = forEachFile;
 exports.validateLink = validateLink;
+exports.findLinks = findLinks;

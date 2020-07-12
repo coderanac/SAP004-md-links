@@ -9,25 +9,26 @@ function renderLogWithStats(links, logger) {
   };
 
   links.forEach((link) => {
-    const status = link.status === 200 ? 'valid' : 'broken';
-    unique.add(link.href);
+    const status = link.status < 400 ? 'valid' : 'broken';
     count[status] += 1;
     count.total += 1;
 
-    if (count.total != unique.size) {
+    if (unique.has(link.href)) {
       unique.delete(link.href);
+    } else {
+      unique.add(link.href);
     }
-  })
+  });
 
   logger({ ...count, unique: unique.size });
 }
 
 function renderLog(links, logger) {
-  links.forEach(logger);
+  links.length > 0 ? links.forEach(logger) : console.log('no has link');
 }
 
 function simpleLogger(link) {
-  console.log(` - ${chalk.blue(link.text)} 👉 ${link.href} - ${link.file}`);
+  console.log(`- ${chalk.blue(link.text)} 👉 ${link.href} - ${link.file}`);
 }
 
 function validateLogger(link) {
